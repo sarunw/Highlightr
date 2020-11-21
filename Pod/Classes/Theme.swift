@@ -108,17 +108,18 @@ open class Theme {
         
         boldCodeFont = RPFont(descriptor: boldDescriptor, size: font.pointSize)
         italicCodeFont = RPFont(descriptor: italicDescriptor, size: font.pointSize)
+        let obliqueCodeFont = RPFont(descriptor: obliqueDescriptor, size: font.pointSize)
         
         if(italicCodeFont == nil || italicCodeFont.familyName != font.familyName)
         {
-            italicCodeFont = RPFont(descriptor: obliqueDescriptor, size: font.pointSize)
-        }
-        if(italicCodeFont == nil)
-        {
-            italicCodeFont = font
+            if (obliqueCodeFont == nil || obliqueCodeFont.familyName != font.familyName) {
+                italicCodeFont = font
+            } else {
+                italicCodeFont = obliqueCodeFont
+            }
         }
         
-        if(boldCodeFont == nil)
+        if(boldCodeFont == nil || boldCodeFont.familyName != font.familyName)
         {
             boldCodeFont = font
         }
