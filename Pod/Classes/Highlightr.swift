@@ -190,6 +190,7 @@ open class Highlightr
         }
     }
     
+    // TODO: supported nested css here
     private func processHTMLString(_ string: String) -> NSAttributedString?
     {
         let scanner = Scanner(string: string)

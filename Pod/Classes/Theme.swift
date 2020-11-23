@@ -44,6 +44,8 @@ open class Theme {
     /// Default background color for the current theme.
     open var themeBackgroundColor : RPColor!
     
+    open var previewColors: [RPColor]!
+    
     /**
      Initialize the theme with the given theme name.
      
@@ -61,6 +63,29 @@ open class Theme {
         {
             bkgColorHex = strippedTheme[".hljs"]?["background-color"]
         }
+//        print("strippedTheme---")
+//        print(strippedTheme)
+//        print("themeString---")
+//        print(themeString)
+//        print("bkgColorHex---")
+//        print(bkgColorHex)
+//        print("themeDict---")
+//        print(themeDict)
+//        
+        var previewColors = [RPColor]()
+        let samples = [".hljs-keyword",
+                       ".hljs-title",
+                       ".hljs-type",
+                       ".hljs-string"]
+        for key in samples {
+            if let colorHex = strippedTheme[key]?["color"] {
+                let color = UIColor(hex: colorHex)
+                previewColors.append(color)
+            }
+        }
+        
+        self.previewColors = previewColors
+        
         if let bkgColorHex = bkgColorHex
         {
             if(bkgColorHex == "white")
@@ -260,6 +285,8 @@ open class Theme {
             }
             if keyProps.count > 0
             {
+                print("wow")
+                print(className)
                 let key = className.replacingOccurrences(of: ".", with: "")
                 returnTheme[key] = keyProps
             }
